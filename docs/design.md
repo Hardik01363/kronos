@@ -19,7 +19,7 @@ For the simulation model, I had 2 options, tick-based or event-based scheduling.
 ## Process struct
 The process struct will contain the following fields:
 1. PID: An integer process identifier to differentiate between the processes.
-2, Arrival Time: The time at which the process entered the CPU.
+2. Arrival Time: The time at which the process entered the CPU.
 3. Burst Time: The time for which the process needs to run on the CPU. It will get deducted each time the process runs for some time and when it hits 0, the process state will change to completed. This value will not be accessed by any algorithm except SJF, but, the signal to change process state to completed will be sent and used for all the 4 algorithms.
 4. Original Burst Time: This value will be initialised to the value of the burst time provided by the user. This will be used later during the simulation and metrics calculation, but, will be a constant value throughout.
 5. Priority: This value will not be given by User and its initial default value will be set to 0. This  value will be used and dynamically changed by the MLFQ algorithm.
