@@ -7,7 +7,7 @@
 
 class FCFS : public Scheduler {
     public:
-        Process* schedule(std::vector<Process>& ready_queue, int current_t) override;
+        std::pair<Process*, int> schedule(std::vector<Process>& ready_queue, int current_t) override;
 };
 
 #endif

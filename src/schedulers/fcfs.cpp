@@ -13,5 +13,6 @@ Process* FCFS::schedule(std::vector<Process>& ready_queue, int current_time) {
             ptr_min_arr_t = &pr;
         }
     }
-    return ptr_min_arr_t
+    auto sched_p = std::make_pair(ptr_min_arr_t, oburst_t);
+    return sched_p
 }

@@ -7,7 +7,7 @@
 
 class Scheduler {
     public:
-        virtual Process* schedule(std::vector<Process>& ready_queue, int current_t) = 0;
+        virtual std::pair<Process*, int> schedule(std::vector<Process>& ready_queue, int current_t) = 0;
         virtual ~Scheduler() = default;
 };
 
