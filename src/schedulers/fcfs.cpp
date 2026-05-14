@@ -4,7 +4,7 @@
 #include <vector>
 #include <limits.h>
 
-Process* FCFS::schedule(std::vector<Process>& ready_queue, int current_time) {
+std::pair<Process*, int> FCFS::schedule(std::vector<Process>& ready_queue, int current_time) {
     int min_arr_t = INT_MAX;
     Process* ptr_min_arr_t = nullptr;
     for(auto& pr : ready_queue) {
@@ -13,6 +13,6 @@ Process* FCFS::schedule(std::vector<Process>& ready_queue, int current_time) {
             ptr_min_arr_t = &pr;
         }
     }
-    auto sched_p = std::make_pair(ptr_min_arr_t, oburst_t);
-    return sched_p
+    auto sched_pr = std::make_pair(ptr_min_arr_t, oburst_t);
+    return sched_pr
 }
