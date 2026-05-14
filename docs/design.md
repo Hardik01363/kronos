@@ -23,7 +23,7 @@ The process struct will contain the following fields:
 3. Burst Time: The time for which the process needs to run on the CPU. It will get deducted each time the process runs for some time and when it hits 0, the process state will change to completed. This value will not be accessed by any algorithm except SJF, but, the signal to change process state to completed will be sent and used for all the 4 algorithms.
 4. Original Burst Time: This value will be initialised to the value of the burst time provided by the user. This will be used later during the simulation and metrics calculation, but, will be a constant value throughout.
 5. Priority: This value will not be given by User and its initial default value will be set to 0. This  value will be used and dynamically changed by the MLFQ algorithm.
-6. enum State: The state enum will have 3 possible states to be in (ready, running, completed). We have no need for a blocked state as we are not considering I/O in our metrics calculations.
+6. enum State: The state enum will have 4 possible states to be in (Ready, Running, Completed, NotArrived). We have no need for a blocked state as we are not considering I/O in our metrics calculations.
 Note: Completion time is deliberately left out as it is a result of our simulation and not a part of user input
 
 ## Scheduler interface

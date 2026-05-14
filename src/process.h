@@ -1,7 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-enum class State { Ready, Running, Completed };
+enum class State { Ready, Running, Completed, NotArrived };
 
 struct  Process {
 int pid;

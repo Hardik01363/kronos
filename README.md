@@ -20,7 +20,7 @@ The internal process struct tracks the following fields:
 * Burst Time: The time for which the process needs to run on the CPU. It will get deducted each time the process runs for some time and when it hits 0, the process state will change to completed.
 * Original Burst Time: Initialised to the value of the burst time provided by the user. Kept constant for metrics calculation throughout.
 * Priority: Dynamically changed by the MLFQ algorithm.
-* State: Enum with 3 possible states (ready, running, completed).
+* State: Enum with 4 possible states (Ready, Running, Completed, NotArrived).
 
 Note: Completion time is deliberately left out as it is a result of our simulation and not a part of user input.
 
