@@ -8,7 +8,7 @@ In Kronos, 4 CPU scheduling algorithms (namely FCFS, SJF, RR, MLFQ) have been im
 1. User can input structs for each process of the form (PID, Arrival Time, Burst Time). Default Priority will be set to 0 and changed by MLFQ algorithm. Default initial state will be ready.
 2. User can enter a file containing all the processes' information.
 3. User can enter an integer and that many number of processes with random initial values will be used.\
-The Processes deliberately do not contain any information about I/O time as including I/O and Blocking processes for it will not add much meaningful value to our metrics, as, the main target of Kronos is to compare the different algorithms, not simulate a scheduler.
+The Processes deliberately do not contain any information about I/O time as including I/O and Blocking processes for it will not add much meaningful value to our metrics, as, the main target of Kronos is to compare the different algorithms, not simulate a scheduler. Also, the task of simulating hardware interrupts that trap into the OS and the return-from-trap instructions would add many more levels of complexity, destroying the elegance of the simulation.
 
 ## Time quantum benchmarking in RR
 In the RR implementation, Kronos doesnt use a predefined Time quantum value, but, tests on various values for it and chooses the best performing one. The metrics for all the tried time quantum values will also be provided. I chose this form of implementation of RR despite its additional complexity as it provides a significant and meaningful boost to the performance of RR algorithm, and, in turn, also boosts performance for MLFQ as well.
