@@ -19,7 +19,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         }
         
         Cprocess temp_pr = {0,0,0,0,0,0};
-        auto sched_pr = scheduler.schedule(ready_queue, current_t);
+        auto sched_pr = scheduler->schedule(ready_queue, current_t);
         sched_pr.first->state = Running;
         temp_pr.pid = sched_pr.first->pid;
 
@@ -63,6 +63,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
     for(pr : std::vector<Process>& process_queue) {
         pr.burst_t = pr.oburst_t;
         pr.state = NotArrived;
+        pr.priority = 0;
     }
 
     return output
