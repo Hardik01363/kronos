@@ -49,3 +49,6 @@ For cross algorithm comparison, the simulation uses the time quantum value that 
 
 ## Requirements of the build environment for Kronos
 
+
+## Text file format for method 2 input
+
