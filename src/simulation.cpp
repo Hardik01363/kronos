@@ -20,6 +20,12 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         
         Cprocess temp_pr = {0,0,0,0,0,0};
         auto sched_pr = scheduler->schedule(ready_queue, current_t);
+
+        if(sched_pr.first == nullptr) {
+            current_t += sched_pr.second;
+            continue;
+        }
+
         sched_pr.first->state = Running;
         temp_pr.pid = sched_pr.first->pid;
 
