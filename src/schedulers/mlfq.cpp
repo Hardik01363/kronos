@@ -10,18 +10,18 @@ std::pair<Process*, int> MLFQ::schedule(std::vector<Process>& ready_queue, int c
     int reset_t = 4*fifth_quan;
     if(current_t/reset_t > cycle_no){
         cycle_no = current_t/reset_t;
-        for(pr : std::vector<Process>& ready_queue) pr.priority = 0;
+        for(Process& pr : ready_queue) pr.priority = 0;
     }
 
     if(ready_queue.empty()) {
         auto proc = std::make_pair(nullptr, 1);
-        return proc
+        return proc;
     }
 
     int comparator = 5;
     Process* ptr_sched_pr = nullptr;
     int runtime = 1;
-    for(pr : std::vector<Process>& ready_queue) {
+    for(Process& pr : ready_queue) {
         if(pr.priority < comparator) {
             comparator = pr.priority;
             ptr_sched_pr = &pr;
@@ -30,5 +30,5 @@ std::pair<Process*, int> MLFQ::schedule(std::vector<Process>& ready_queue, int c
     }
     if(ptr_sched_pr->priority < 4) ptr_sched_pr->priority += 1;
     auto sched_pr = std::make_pair(ptr_sched_pr, runtime);
-    return sched_pr
+    return sched_pr;
 }

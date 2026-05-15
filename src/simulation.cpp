@@ -10,11 +10,11 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
     int completed_p = 0;
     std::vector<Process> ready_queue;
     std::vector<Cprocess> output;
-    while(completed_p < process_queue.size()) {
-        for(auto& pr : std::vector<Process>& process_queue) {
-            if(pr.arr_t < current_t && pr.state == NotArrived) {
+    while(completed_p < (int)process_queue.size()) {
+        for(Process& pr : process_queue) {
+            if(pr.arr_t < current_t && pr.state == State::NotArrived) {
                 ready_queue.push_back(pr);
-                pr.state = Ready;
+                pr.state = State::Ready;
             }
         }
         
@@ -26,7 +26,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
             continue;
         }
 
-        sched_pr.first->state = Running;
+        sched_pr.first->state = State::Running;
         temp_pr.pid = sched_pr.first->pid;
 
         if(sched_pr.first->burst_t == sched_pr.first->oburst_t) temp_pr.f_cpu_t = current_t;
@@ -35,7 +35,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         current_t += sched_pr.second;
 
         if(sched_pr.first->burst_t == 0) {
-            sched_pr.first->state = Completed;
+            sched_pr.first->state = State::Completed;
             //Removing the now completed process from ready queue
             ready_queue.erase(
               std::remove_if(ready_queue.begin(), ready_queue.end(), 
@@ -50,10 +50,10 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
             temp_pr.response_t = temp_pr.f_cpu_t - sched_pr.first->arr_t;
             completed_p += 1;
         }
-        else sched_pr.first->state = Ready;
+        else sched_pr.first->state = State::Ready;
         
         int match = 0;
-        for(pr : std::vector<Cprocess>& output) {
+        for(Cprocess& pr : output) {
             if(pr.pid == temp_pr.pid) {
                 pr.f_cpu_t = temp_pr.f_cpu_t;
                 pr.cmp_t = temp_pr.cmp_t;
@@ -66,11 +66,11 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         if(match == 0) output.push_back(temp_pr); 
     }
 
-    for(pr : std::vector<Process>& process_queue) {
+    for(Process& pr : process_queue) {
         pr.burst_t = pr.oburst_t;
         pr.state = NotArrived;
         pr.priority = 0;
     }
 
-    return output
+    return output;
 }

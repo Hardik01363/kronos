@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 std::vector<Process> input1() {
     std::vector<Process> pq;
@@ -123,7 +124,7 @@ void print_table(const std::vector<Cprocess>& data) {
     for(const auto& pr : data) {
         std::cout << pr.pid << "\t" 
                   << pr.cmp_t << "\t\t" 
-                  << pr.rnard_t << "\t\t" 
+                  << pr.trnard_t << "\t\t" 
                   << pr.wt_t << "\t" 
                   << pr.response_t << std::endl;
     }
@@ -193,7 +194,7 @@ int analyze_best_quantum(const std::vector<std::vector<Cprocess>>& data) {
         if(n == 0) continue;
         
         for(const auto& pr : data[i]) {
-            total_tr += pr.rnard_t;
+            total_tr += pr.trnard_t;
             total_resp += pr.response_t;
         }
         

@@ -5,6 +5,7 @@
 #include <limits.h>
 
 std::pair<Process*, int> FCFS::schedule(std::vector<Process>& ready_queue, int current_time) {
+    (void)current_time;
     int min_arr_t = INT_MAX;
     Process* ptr_min_arr_t = nullptr;
     int obt = 1; //Original burst time
@@ -16,5 +17,5 @@ std::pair<Process*, int> FCFS::schedule(std::vector<Process>& ready_queue, int c
         }
     }
     auto sched_pr = std::make_pair(ptr_min_arr_t, obt);
-    return sched_pr
+    return sched_pr;
 }
