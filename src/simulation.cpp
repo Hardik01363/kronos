@@ -38,18 +38,19 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
 
         if(sched_pr.first->burst_t == 0) {
             sched_pr.first->state = State::Completed;
-            //Removing the now completed process from ready queue
-            ready_queue.erase(
-              std::remove_if(ready_queue.begin(), ready_queue.end(), 
-              [&](const Process& pr) {
-             return pr.pid == sched_pr.first->pid;
-                 }),
-               ready_queue.end()
-            );
             temp_pr.cmp_t = current_t;
             temp_pr.trnard_t = temp_pr.cmp_t - sched_pr.first->arr_t;
             temp_pr.wt_t = temp_pr.trnard_t - sched_pr.first->oburst_t;
             completed_p += 1;
+            //Removing the now completed process from ready queue
+            int target_pid = sched_pr.first->pid; 
+            ready_queue.erase(
+                std::remove_if(ready_queue.begin(), ready_queue.end(),
+                [target_pid](const Process& pr) {
+                    return pr.pid == target_pid;
+                }),
+                ready_queue.end()
+            );
         }
         else sched_pr.first->state = State::Ready;
         
