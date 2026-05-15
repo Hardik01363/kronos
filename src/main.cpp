@@ -91,14 +91,14 @@ int main() {
     std::vector<std::vector<Cprocess>> rr_data;
     for(int i=1; i<=16; i++) {
         RR rr_sched(i);
-        std::vector<Cprocess> rr_quan_data = simulate(process_queue, &rr_sched(i));
+        std::vector<Cprocess> rr_quan_data = simulate(process_queue, &rr_sched);
         rr_data.push_back(rr_quan_data);
     }
 
     std::vector<std::vector<Cprocess>> mlfq_data;
-    for(int i=0; i<=16; i++) {
+    for(int i=1; i<=16; i++) {
         MLFQ mlfq_sched(i);
-        std::vector<Cprocess> mlfq_quan_data = simulate(process_queue, &mlfq_sched(i));
+        std::vector<Cprocess> mlfq_quan_data = simulate(process_queue, &mlfq_sched);
         mlfq_data.push_back(mlfq_quan_data);
     }
 }
