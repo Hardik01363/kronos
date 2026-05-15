@@ -29,8 +29,10 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         sched_pr.first->state = State::Running;
         temp_pr.pid = sched_pr.first->pid;
 
-        if(sched_pr.first->burst_t == sched_pr.first->oburst_t) temp_pr.f_cpu_t = current_t;
-        
+        if(sched_pr.first->burst_t == sched_pr.first->oburst_t) {
+            temp_pr.f_cpu_t = current_t;
+            temp_pr.response_t = current_t - sched_pr.first->arr_t;
+        }
         sched_pr.first->burst_t -= sched_pr.second;
         current_t += sched_pr.second;
 
@@ -47,7 +49,6 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
             temp_pr.cmp_t = current_t;
             temp_pr.trnard_t = temp_pr.cmp_t - sched_pr.first->arr_t;
             temp_pr.wt_t = temp_pr.trnard_t - sched_pr.first->oburst_t;
-            temp_pr.response_t = temp_pr.f_cpu_t - sched_pr.first->arr_t;
             completed_p += 1;
         }
         else sched_pr.first->state = State::Ready;
@@ -55,11 +56,9 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
         int match = 0;
         for(Cprocess& pr : output) {
             if(pr.pid == temp_pr.pid) {
-                pr.f_cpu_t = temp_pr.f_cpu_t;
                 pr.cmp_t = temp_pr.cmp_t;
                 pr.trnard_t = temp_pr.trnard_t;
                 pr.wt_t = temp_pr.wt_t;
-                pr.response_t = temp_pr.response_t;
                 match += 1;
             }
         }
