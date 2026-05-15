@@ -68,7 +68,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
 
     for(Process& pr : process_queue) {
         pr.burst_t = pr.oburst_t;
-        pr.state = NotArrived;
+        pr.state = State::NotArrived;
         pr.priority = 0;
     }
 
