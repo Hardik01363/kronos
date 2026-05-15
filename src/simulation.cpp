@@ -11,7 +11,7 @@ std::vector<Cprocess> simulate(std::vector<Process>& process_queue, Scheduler* s
     std::vector<Process> ready_queue;
     std::vector<Cprocess> output;
     while(completed_p < process_queue.size()) {
-        for(pr : std::vector<Process>& process_queue) {
+        for(auto& pr : std::vector<Process>& process_queue) {
             if(pr.arr_t < current_t && pr.state == NotArrived) {
                 ready_queue.push_back(pr);
                 pr.state = Ready;
