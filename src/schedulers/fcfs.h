@@ -1,7 +1,7 @@
 #ifndef FCFS_H
 #define FCFS_H
 
-#include "process.h"
+#include "../process.h"
 #include "../scheduler.h"
 #include <vector>
 
