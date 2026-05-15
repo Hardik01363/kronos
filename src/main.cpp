@@ -120,14 +120,46 @@ std::vector<Process> input3() {
 }
 
 void print_table(const std::vector<Cprocess>& data) {
+    if (data.empty()) return;
+
     std::cout << "PID\tCompletion\tTurnaround\tWaiting\tResponse" << std::endl;
+    
+    double total_tr = 0, total_wt = 0, total_resp = 0;
+    int total_burst = 0;
+    int max_cmp = 0;
+    int min_arr = data[0].cmp_t - data[0].trnard_t; 
+
     for(const auto& pr : data) {
         std::cout << pr.pid << "\t" 
                   << pr.cmp_t << "\t\t" 
                   << pr.trnard_t << "\t\t" 
                   << pr.wt_t << "\t" 
                   << pr.response_t << std::endl;
+        
+        total_tr += pr.trnard_t;
+        total_wt += pr.wt_t;
+        total_resp += pr.response_t;
+        
+        total_burst += (pr.trnard_t - pr.wt_t);
+        
+        if(pr.cmp_t > max_cmp) max_cmp = pr.cmp_t;
+        int arr = pr.cmp_t - pr.trnard_t;
+        if(arr < min_arr) min_arr = arr;
     }
+
+    int n = data.size();
+    int total_time = max_cmp - min_arr;
+    if(total_time <= 0) total_time = 1; //Failproofing division by 0
+
+    double cpu_util = ((double)total_burst / total_time) * 100.0;
+    double throughput = (double)n / total_time;
+
+    std::cout << "--------------------------------------------------------" << std::endl;
+    std::cout << "Average Turnaround: " << (total_tr / n) << std::endl;
+    std::cout << "Average Waiting:    " << (total_wt / n) << std::endl;
+    std::cout << "Average Response:   " << (total_resp / n) << std::endl;
+    std::cout << "CPU Utilization:    " << cpu_util << "%" << std::endl;
+    std::cout << "Throughput:         " << throughput << " processes/tick\n" << std::endl;
 }
 
 void print_rr_table(const std::vector<std::vector<Cprocess>>& rr_data) {
